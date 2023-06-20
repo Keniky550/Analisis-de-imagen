@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Carga la imagen desde un archivo
-image = cv2.imread('img/circulos.jpg')
+image = cv2.imread('img/figuras.jpg')
 
 # Convierte la imagen a escala de grises
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
