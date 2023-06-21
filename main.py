@@ -80,7 +80,7 @@ def figName(contorno,width,height):
 
 	return namefig
 	
-imagen = cv2.imread("/img/figurasColores2.png")
+imagen = cv2.imread("figurasColores2.png")
 gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
 canny = cv2.Canny(gray, 10,150)
 canny = cv2.dilate(canny,None,iterations=1)
