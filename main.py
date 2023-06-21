@@ -101,6 +101,5 @@ for c in cnts:
 	cv2.imshow('imagen',imagen)
 	cv2.waitKey(0)
 
-#cv2.imshow('imagen',imagen)
-#cv2.waitKey(0)
+
 cv2.destroyAllWindows()
