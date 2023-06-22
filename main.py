@@ -1,35 +1,30 @@
 import cv2
 import numpy as np
-#Librerias para crear un input en ventana
-from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
+#Código para crear un input en ventana
+import tkinter as tk
+def guardar_datos():
+    forma = entrada1.get()
+    color = entrada2.get()
+    print(f"Forma: {forma}, Color: {color}")
 
-def ventanaCapturaDatos():
-    def devolverDatos():
-        textoCaja = entryTexto.get()
-        texto.set(textoCaja)
-        root.destroy()
+ventana = tk.Tk()
+ventana.title("Características del objeto")
 
-    root = Tk()
-    root.title("Exoger Figura")
+etiqueta1 = tk.Label(ventana, text="Forma:")
+entrada1 = tk.Entry(ventana)
+etiqueta2 = tk.Label(ventana, text="Color:")
+entrada2 = tk.Entry(ventana)
+boton_guardar = tk.Button(ventana, text="Guardar", command=guardar_datos)
 
-    #Frame estradade datos
-    miFrame = Frame(root)
-    miFrame.pack()
+etiqueta1.pack()
+entrada1.pack()
+etiqueta2.pack()
+entrada2.pack()
+boton_guardar.pack()
 
-    texto = StringVar()
+ventana.mainloop()
 
-    #Entry
-    entryTexto = Entry(miFrame,justify=CENTER, textvariable=texto)
-    entryTexto.grid(row=0, column=0, padx=5, pady=5)
-
-    #Botón aceptar
-    botonAceptar = Button(miFrame, text="Aceptar", command=lambda:devolverDatos())
-    botonAceptar.grid(row=1, column=0,sticky="e", padx=5, pady=5)
-
-    root.mainloop()
-    return texto.get()
+#Fin de código
 
 def figColor(imagenHSV):
 	# Rojo
@@ -111,12 +106,6 @@ def figName(contorno,width,height):
 
 	return namefig
 	
-
-print("Ventana entrada de datos")
-texto = ventanaCapturaDatos()
-
-
-
 imagen = cv2.imread("figurasColores2.png")
 gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
 canny = cv2.Canny(gray, 10,150)
@@ -135,11 +124,8 @@ for c in cnts:
 	color = figColor(maskHSV)
 	nameColor = name + ' ' + color
 
-
-
 	cv2.putText(imagen,nameColor,(x,y-5),1,0.8,(0,255,0),1)
 	cv2.imshow('imagen',imagen)
 	cv2.waitKey(0)
-
 
 cv2.destroyAllWindows()
