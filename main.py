@@ -2,29 +2,36 @@ import cv2
 import numpy as np
 #Código para crear un input en ventana
 import tkinter as tk
+from tkinter import ttk
+
+ti_color = int()
+ti_forma = int()
+
 def guardar_datos():
-    forma = entrada1.get()
-    color = entrada2.get()
-    print(f"Forma: {forma}, Color: {color}")
+    forma = combobox1.get()
+    color = combobox2.get()
+
+    print({'forma': forma, 'color':color})
+    ventana.destroy()
 
 ventana = tk.Tk()
 ventana.title("Características del objeto")
 
 etiqueta1 = tk.Label(ventana, text="Forma:")
-entrada1 = tk.Entry(ventana)
+combobox1 = ttk.C
+ombobox(ventana,values=["circulo", "cuadrado", "triangulo", "rectangulo"])
 etiqueta2 = tk.Label(ventana, text="Color:")
-entrada2 = tk.Entry(ventana)
+combobox2 = ttk.Combobox(ventana,values=["rojo", "naranja", "amarillo", "verde"])
 boton_guardar = tk.Button(ventana, text="Guardar", command=guardar_datos)
 
 etiqueta1.pack()
-entrada1.pack()
+combobox1.pack()
 etiqueta2.pack()
-entrada2.pack()
+combobox2.pack()
 boton_guardar.pack()
 
 ventana.mainloop()
-
-#Fin de código
+#Fin del input
 
 def figColor(imagenHSV):
 	# Rojo
@@ -71,12 +78,24 @@ def figColor(imagenHSV):
 	cntsVioleta = cv2.findContours(maskVioleta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0] #Reemplaza por 1, si tienes OpenCV3
 	cntsRosa = cv2.findContours(maskRosa, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0] #Reemplaza por 1, si tienes OpenCV3
 
-	if len(cntsRojo)>0: color = 'Rojo'
-	elif len(cntsNaranja)>0: color = 'Naranja'
-	elif len(cntsAmarillo)>0: color = 'Amarillo'
-	elif len(cntsVerde)>0: color = 'Verde'
-	elif len(cntsVioleta)>0: color = 'Violeta'
-	elif len(cntsRosa)>0: color = 'Rosa'
+	if len(cntsRojo)>0: 
+		color = 'Rojo' 
+		ti_color = 1
+	elif len(cntsNaranja)>0: 
+		color = 'Naranja' 
+		ti_color = 2
+	elif len(cntsAmarillo)>0: 
+		color = 'Amarillo' 
+		ti_color = 3
+	elif len(cntsVerde)>0: 
+		color = 'Verde' 
+		ti_color = 4
+	elif len(cntsVioleta)>0: 
+		color = 'Violeta' 
+		ti_color = 5
+	elif len(cntsRosa)>0: 
+		color = 'Rosa'
+		ti_color = 6
 
 	return color
 		
