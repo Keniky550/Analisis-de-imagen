@@ -18,8 +18,7 @@ ventana = tk.Tk()
 ventana.title("Características del objeto")
 
 etiqueta1 = tk.Label(ventana, text="Forma:")
-combobox1 = ttk.C
-ombobox(ventana,values=["circulo", "cuadrado", "triangulo", "rectangulo"])
+combobox1 = ttk.Combobox(ventana,values=["circulo", "cuadrado", "triangulo", "rectangulo"])
 etiqueta2 = tk.Label(ventana, text="Color:")
 combobox2 = ttk.Combobox(ventana,values=["rojo", "naranja", "amarillo", "verde"])
 boton_guardar = tk.Button(ventana, text="Guardar", command=guardar_datos)
@@ -78,25 +77,12 @@ def figColor(imagenHSV):
 	cntsVioleta = cv2.findContours(maskVioleta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0] #Reemplaza por 1, si tienes OpenCV3
 	cntsRosa = cv2.findContours(maskRosa, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[0] #Reemplaza por 1, si tienes OpenCV3
 
-	if len(cntsRojo)>0: 
-		color = 'Rojo' 
-		ti_color = 1
-	elif len(cntsNaranja)>0: 
-		color = 'Naranja' 
-		ti_color = 2
-	elif len(cntsAmarillo)>0: 
-		color = 'Amarillo' 
-		ti_color = 3
-	elif len(cntsVerde)>0: 
-		color = 'Verde' 
-		ti_color = 4
-	elif len(cntsVioleta)>0: 
-		color = 'Violeta' 
-		ti_color = 5
-	elif len(cntsRosa)>0: 
-		color = 'Rosa'
-		ti_color = 6
-
+	if len(cntsRojo)>0: color = 'Rojo' 
+	elif len(cntsNaranja)>0: color = 'Naranja' 
+	elif len(cntsAmarillo)>0: color = 'Amarillo' 
+	elif len(cntsVerde)>0: color = 'Verde' 
+	elif len(cntsVioleta)>0: color = 'Violeta' 
+	elif len(cntsRosa)>0: color = 'Rosa'
 	return color
 		
 def figName(contorno,width,height):
