@@ -96,14 +96,28 @@ contornoAzul = cv2.findContours(maskAzul, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIM
 #Trabajando con las figuras
 ctns,_=cv2.findContours(canny,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
-for c in ctns:
+#Fusionar contornos
+
+
+
+for c in  ctns:
     epsilon = 0.015*cv2.arcLength(c,True)
     approx = cv2.approxPolyDP(c,epsilon,True)
     print(len(approx))
     #cv2.drawContours(img,[approx],0,(0,255,0),2)
     #cv2.imshow("Figuras", img)
     #cv2.waitKey(0)
-    if forma == 'triangulo' and len(approx) == 3:
+    if forma =='':
+        if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
+        elif color == "rojo": cv2.drawContours(img,contornoRojo,-1,(0,255,0),2)
+        elif color == "naranja": cv2.drawContours(img,contornoNaranja,-1,(0,255,0),2)
+        elif color == "amarillo": cv2.drawContours(img,contornoAmarillo,-1,(0,255,0),2)
+        elif color == "verde": cv2.drawContours(img,contornoVerde,-1,(0,255,0),2)
+        elif color == "violeta": cv2.drawContours(img,contornoVioleta,-1,(0,255,0),2)
+        elif color == "rosa": cv2.drawContours(img,contornoRosa,-1,(0,255,0),2)
+        elif color == "azul": cv2.drawContours(img,contornoAzul,-1,(0,255,0),2)
+
+    elif forma == 'triangulo' and len(approx) == 3:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
         elif color == "rojo": cv2.drawContours(img,contornoRojo,-1,(0,255,0),2)
         elif color == "naranja": cv2.drawContours(img,contornoNaranja,-1,(0,255,0),2)
@@ -120,12 +134,8 @@ for c in ctns:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
     elif forma == 'pentagono' and len(approx) == 5:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
+        
     
-
-
-
-
-
 
 cv2.imshow("FIguras", img)
 cv2.waitKey(0)
