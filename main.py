@@ -116,9 +116,7 @@ contornoAzul = cv2.findContours(maskAzul, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIM
 ctns,_=cv2.findContours(canny,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
 #Fusionar contornos
-
-
-for c in  ctns:
+for c in ctns:
     epsilon = 0.001*cv2.arcLength(c,True)
     approx = cv2.approxPolyDP(c,epsilon,True)
     print(len(approx))
