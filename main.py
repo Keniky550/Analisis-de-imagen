@@ -117,7 +117,7 @@ ctns,_=cv2.findContours(canny,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
 #Fusionar contornos
 for c in ctns:
-    epsilon = 0.001*cv2.arcLength(c,True)
+    epsilon = 0.1*cv2.arcLength(c,True)
     approx = cv2.approxPolyDP(c,epsilon,True)
     print(len(approx))
     #cv2.drawContours(img,[approx],0,(0,255,0),2)
@@ -136,20 +136,6 @@ for c in ctns:
     elif forma == 'triangulo' and len(approx) == 3:
         if color == "": 
             cv2.drawContours(img,[approx],-1,(0,255,0),2)
-        elif color == "rojo": 
-           on_forma = cv2.findContours(img,contornoRojo,-1,(0,255,0),2)
-        elif color == "naranja": 
-            con_forma = cv2.findContours(img,contornoNaranja,-1,(0,255,0),2)
-        elif color == "amarillo": 
-            con_forma = cv2.findContours(img,contornoAmarillo,-1,(0,255,0),2)
-        elif color == "verde": 
-            con_forma = cv2.findContours(img,contornoVerde,-1,(0,255,0),2)
-        elif color == "violeta": 
-            con_forma = cv2.findContours(img,contornoVioleta,-1,(0,255,0),2)
-        elif color == "rosa": 
-            con_forma = cv2.findContours(img,contornoRosa,-1,(0,255,0),2)
-        elif color == "azul": 
-            con_forma = cv2.findContours(img,contornoAzul,-1,(0,255,0),2)
     elif forma == 'circulo' and len(approx) == 8:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
     elif forma == 'cuadrado' and len(approx) == 4:
@@ -160,5 +146,6 @@ for c in ctns:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
         
 cv2.imshow("FIguras", img)
+cv2.imshow("Canny",canny)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
