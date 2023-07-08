@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from tkinter import ttk
 
-url ="https://192.168.3.58:8080/video"
+url ="https://172.16.219.240:8080/video"
 cap = cv2.VideoCapture(url)
 
 def getContours(img):
