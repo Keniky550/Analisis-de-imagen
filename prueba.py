@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from tkinter import ttk
 
-url ="https://172.16.219.240:8080/video"
+url ="https://192.168.43.151:8080/video"
 cap = cv2.VideoCapture(url)
 
 def getContours(img):
@@ -13,11 +13,11 @@ def getContours(img):
         if area>500:
             cv2.drawContours(frame,cnt,-1,(0,255,0),2)
             perimetro = cv2.arcLength(cnt,True)
-            approx = cv2.approxPolyDP(cnt,0.02*perimetro,True)
+            approx = cv2.approxPolyDP(cnt,0.0001*perimetro,True)
             objCorner = len(approx)
             x, y, w, h = cv2.boundingRect(approx)
 
-            if objCorner == 3:
+            if objCorner == 2:
                 objecttype = "Triangulo"
             elif objCorner == 4:
                 aspecto = w/float(h)
@@ -30,6 +30,7 @@ def getContours(img):
             else:
                 objecttype = "None"
             
+
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 2)
 
 while (cap.isOpened()):
@@ -44,6 +45,9 @@ while (cap.isOpened()):
         key = cv2.waitKey(1)
         if key == ord('q'):
             break
+        elif key == ord('c'):
+            resize_frame = cv2.resize(frame,(600,400))
+            cv2.imwrite('Encontrado.jpg',resize_frame)
     except cv2.error:
         print("end")
         break
