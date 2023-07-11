@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 
 url ="https://192.168.3.58:8080/video"
-captura = cv2.VideoCapture(url)
+captura = cv2.VideoCapture(0)
 while (captura.isOpened()):
     camera,frame = captura.read()
     try:
@@ -117,12 +117,12 @@ ctns,_=cv2.findContours(canny,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
 #Fusionar contornos
 for c in ctns:
-    epsilon = 0.1*cv2.arcLength(c,True)
+    epsilon = 0.001*cv2.arcLength(c,True)
     approx = cv2.approxPolyDP(c,epsilon,True)
     print(len(approx))
-    #cv2.drawContours(img,[approx],0,(0,255,0),2)
-    #cv2.imshow("Figuras", img)
-    #cv2.waitKey(0)
+    cv2.drawContours(img,[approx],0,(0,255,0),2)
+#    cv2.imshow("Figuras", img)
+    cv2.waitKey(0)
     if forma =='':
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
         elif color == "rojo": cv2.drawContours(img,contornoRojo,-1,(0,255,0),2)
@@ -135,11 +135,12 @@ for c in ctns:
 
     elif forma == 'triangulo' and len(approx) == 3:
         if color == "": 
-            cv2.drawContours(img,[approx],-1,(0,255,0),2)
+            cv2.drawContours(img,[approx],0,(0,255,0),2)
     elif forma == 'circulo' and len(approx) == 8:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
     elif forma == 'cuadrado' and len(approx) == 4:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
+        cv2.imwrite("ENCONTRARDO.png",img)
     elif forma == 'hexagono' and len(approx) == 6:
         if color == "": cv2.drawContours(img,[approx],-1,(0,255,0),2)
     elif forma == 'pentagono' and len(approx) == 5:
