@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 
 url ="https://192.168.3.58:8080/video"
-captura = cv2.VideoCapture(0)
+captura = cv2.VideoCapture(url)
 while (captura.isOpened()):
     camera,frame = captura.read()
     try:
