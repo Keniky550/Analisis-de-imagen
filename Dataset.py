@@ -2,8 +2,11 @@ import cv2
 import numpy as np
 from tkinter import ttk
 
+
 url ="https://192.168.3.58:8080/video"
 cap = cv2.VideoCapture(0)
+capturation = 0
+
 
 def getContours(img):
     contours,Hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -40,16 +43,18 @@ while (cap.isOpened()):
     imgCanny = cv2.Canny(imgBlur, 50, 50)
     getContours(imgCanny)
 
+ 
     try:
         cv2.imshow('Imagen',cv2.resize(frame,(600,400)))
         key = cv2.waitKey(1)
-        if key == ord('q'):
-            break
-        elif key == ord('c'):
+        if (getContours):
             resize_frame = cv2.resize(frame,(600,400))
-            cv2.imwrite('Encontrado.jpg',resize_frame)
+            image_filename = 'Encontrado.jpg'
+            cv2.imwrite(image_filename, resize_frame)
     except cv2.error:
         print("end")
         break
-    if cv2.waitKey(1)==27:
-        break
+
+cap.release()
+cv2.destroyAllWindows()
+
