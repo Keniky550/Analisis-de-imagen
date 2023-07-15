@@ -2,9 +2,13 @@ import cv2
 import numpy as np
 import tkinter as tk
 from tkinter import ttk
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
+from email.mime.text import MIMEText
 
 url ="https://192.168.3.58:8080/video"
-captura = cv2.VideoCapture(url)
+captura = cv2.VideoCapture(0)
 while (captura.isOpened()):
     camera,frame = captura.read()
     try:
@@ -20,6 +24,25 @@ while (captura.isOpened()):
         break
 
 cv2.destroyAllWindows()
+
+# Configuración de correo electrónico
+fromaddr = "kenneth2001mp@gmail.com"
+toaddr = "ken.jav550@gmail.com"
+password = "12345"
+
+# Crear el objeto MIMEMultipart
+msg = MIMEMultipart()
+
+# Configurar los parámetros del mensaje
+msg['From'] = fromaddr
+msg['To'] = toaddr
+msg['Subject'] = "Imagen del objeto"
+
+# Cuerpo del mensaje
+body = "Se envia imagen"
+
+# Agregar el cuerpo del mensaje al objeto MIMEMultipart
+msg.attach(MIMEText(body, 'plain'))
 
 #Código para crear un input en ventana
 
@@ -150,3 +173,20 @@ cv2.imshow("FIguras", img)
 cv2.imshow("Canny",canny)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+
+# Adjuntar imagen
+with open('imagen.jpg', 'rb') as f:
+    img = MIMEImage(f.read())
+    img.add_header('Content-Disposition', 'attachment', filename="imagen.jpg")
+    msg.attach(img)
+
+# Crear el servidor
+server = smtplib.SMTP('smtp.gmail.com: 587')
+server.starttls()
+
+# Iniciar sesión en el servidor
+server.login("ken.jav550@gmail.com", "Speedforce@18")
+
+# Enviar el mensaje a través del servidor.
+server.send_message(msg)
+server.quit()

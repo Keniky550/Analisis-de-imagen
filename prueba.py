@@ -3,7 +3,7 @@ import numpy as np
 from tkinter import ttk
 
 url ="https://192.168.3.58:8080/video"
-cap = cv2.VideoCapture(url)
+cap = cv2.VideoCapture(0)
 
 def getContours(img):
     contours,Hierarchy = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)

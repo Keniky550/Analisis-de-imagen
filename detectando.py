@@ -16,7 +16,6 @@ while True:
 
     for (x,y,w,h) in toy:
         cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
-        cv2.putText(frame,'Biletera',(x,y-10),2,0.7,(0,255,0),2,cv2.LINE_AA)
 
     cv2.imshow('frame',frame)
     
