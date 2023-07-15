@@ -51,6 +51,8 @@ while (cap.isOpened()):
             resize_frame = cv2.resize(frame,(600,400))
             image_filename = 'Encontrado.jpg'
             cv2.imwrite(image_filename, resize_frame)
+        if key == ord('q'):
+            break        
     except cv2.error:
         print("end")
         break

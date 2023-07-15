@@ -13,7 +13,7 @@ def getContours(img):
         if area>500:
             cv2.drawContours(frame,cnt,-1,(0,255,0),2)
             perimetro = cv2.arcLength(cnt,True)
-            approx = cv2.approxPolyDP(cnt,0.0001*perimetro,True)
+            approx = cv2.approxPolyDP(cnt,0.05*perimetro,True)
             objCorner = len(approx)
             x, y, w, h = cv2.boundingRect(approx)
 
@@ -32,7 +32,7 @@ def getContours(img):
             
 
             cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 2)
-
+            cv2.putText(frame,objecttype,(x+(w//2)-10,y+(h//2)-10),cv2.FONT_HERSHEY_COMPLEX,0.7,(0,255,0))
 while (cap.isOpened()):
     ret,frame = cap.read()
     imgGray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
@@ -48,6 +48,7 @@ while (cap.isOpened()):
         elif key == ord('c'):
             resize_frame = cv2.resize(frame,(600,400))
             cv2.imwrite('Encontrado.jpg',resize_frame)
+        
     except cv2.error:
         print("end")
         break
